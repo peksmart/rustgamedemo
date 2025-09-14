@@ -1,0 +1,13 @@
+[package]
+name = "hello_yourname"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+[profile.release]
+opt-level = "z"   # 优化级别设置为 "z" (最小体积) 或 "s" (最小体积但兼顾速度)
+lto = true        # 链接时优化：消除冗余代码，显著减小体积
+codegen-units = 1 # 单代码生成单元：配合 LTO 获得最佳优化效果
+panic = "abort"   # 将 panic 行为改为直接终止，移除 panic 展开的代码
+strip = true      # 让 Cargo 自动剥离调试符号（Rust 1.59+）
